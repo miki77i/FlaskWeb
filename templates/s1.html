@@ -6,32 +6,34 @@
     <body>
         <h1>Поиск</h1>
         <p>Выберите жанр:</p>
-        <div class="choice1">
-            <button class="criteria">Комедия</button>
-            <button class="criteria">Ужасы</button>
-            <button class="criteria">Боевик</button>
-            <button class="criteria">Фантастика</button>
-            <button class="criteria">Научное</button>
-            <button class="criteria">Детектив</button>
-            <button class="criteria">Драма</button>
-            <button class="criteria">Трагедия</button>
-            <button class="criteria">Триллер</button>
+       <div class="choice1">
+            <button class="criteria" data-genre="Комедия">Комедия</button>
+            <button class="criteria" data-genre="Ужасы">Ужасы</button>
+            <button class="criteria" data-genre="Боевик">Боевик</button>
+            <button class="criteria" data-genre="Фантастика">Фантастика</button>
+            <button class="criteria" data-genre="Научное">Научное</button>
+            <button class="criteria" data-genre="Детектив">Детектив</button>
+            <button class="criteria" data-genre="Драма">Драма</button>
+            <button class="criteria" data-genre="Трагедия">Трагедия</button>
+            <button class="criteria" data-genre="Триллер">Триллер</button>
+            <button class="criteria" data-genre="Любой">Любой жанр</button>
         </div>
         
-        <p>Выберите возростное ограничение:</p>
+        <p>Выберите возрастное ограничение:</p>
         <div class="choice2">
-            <button class="criteria">0+</button>
-            <button class="criteria">6+</button>
-            <button class="criteria">12+</button>
-            <button class="criteria">16+</button>
-            <button class="criteria">18+</button>
-            <button class="criteria">Любое</button>
+            <button class="criteria" data-age="0+">0+</button>
+            <button class="criteria" data-age="6+">6+</button>
+            <button class="criteria" data-age="12+">12+</button>
+            <button class="criteria" data-age="16+">16+</button>
+            <button class="criteria" data-age="18+">18+</button>
+            <button class="criteria" data-age="Любое">Любое</button>
         </div>
 
         <div class="search">
             <button class="search-button">Поиск</button>
         </div>
-        
-        <a href="/s2">2</a> | <a href="/s3">3</a>
+        <div class="results" id="results"></div>
+        <!-- <a href="/s2">2</a> | <a href="/s3">3</a> -->
+        <script src="{{ url_for('static', filename='Script.js') }}"></script>
     </body>
 </html>
