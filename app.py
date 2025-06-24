@@ -10,9 +10,5 @@ def slide1():
 def slide2():
     return render_template("s2.html")
 
-@app.route("/s3")
-def slide3():
-    return render_template("s3.html")
-
 if __name__ == "__main__":
     app.run(debug=True)
