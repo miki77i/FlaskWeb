@@ -57,5 +57,9 @@ def search():
     
     return jsonify(filtered_movies)
 
+# @app.route("/s2")
+# def slide2():
+#     return render_template("s2.html")
+
 if __name__ == "__main__":
     app.run(debug=True)

@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p><strong>Жанр:</strong> ${movie.genre}</p>
                     <p><strong>Возрастное ограничение:</strong> ${movie.age_rating}</p>
                     <p><strong>Год выпуска:</strong> ${movie.year}</p>
-                    <img src="${movie.image}">
+                    <img src="${movie.image}" href="{{ url_for('templates', filename='s2.html') }}">
                 `;
                 resultsDiv.appendChild(movieDiv);
             });
