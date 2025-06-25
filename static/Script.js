@@ -50,12 +50,15 @@ document.addEventListener('DOMContentLoaded', function() {
             data.forEach(movie => {
                 const movieDiv = document.createElement('div');
                 movieDiv.className = 'movie';
+                const encodedTitle = encodeURIComponent(movie.title);
                 movieDiv.innerHTML = `
                     <h3>${movie.title}</h3>
                     <p><strong>Жанр:</strong> ${movie.genre}</p>
                     <p><strong>Возрастное ограничение:</strong> ${movie.age_rating}</p>
                     <p><strong>Год выпуска:</strong> ${movie.year}</p>
-                    <img src="${movie.image}" href="{{ url_for('templates', filename='s2.html') }}">
+                    <a href="/movie/${encodedTitle}">
+                        <img src="${movie.image}" alt="${movie.title}">
+                    </a>
                 `;
                 resultsDiv.appendChild(movieDiv);
             });

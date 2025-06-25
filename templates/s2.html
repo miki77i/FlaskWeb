@@ -4,7 +4,7 @@
         <title>фильм</title>
     </head>
     <body>
-        <div class="wrapper">
+        <!-- <div class="wrapper">
             <div class="info_wrapper">
                 <div class="info">
                     <div class="img_info">
@@ -24,6 +24,15 @@
                 </div>
             </div>
         </div>
-        <a href="/s1">Х</a> 
+        <a href="/s1">Х</a>  -->
+        <div class="movie-detail">
+        <h1>{{ movie.title }}</h1>
+        <img src="{{ movie.image }}" alt="{{ movie.title }}" class="movie-poster">
+        <p><strong>Жанр:</strong> {{ movie.genre }}</p>
+        <p><strong>Возрастное ограничение:</strong> {{ movie.age_rating }}</p>
+        <p><strong>Год выпуска:</strong> {{ movie.year }}</p>
+        <p><strong>О чём:</strong> {{ movie.info }}</p>
+        <button class="back-button" onclick="history.back()">Назад</button>
+    </div>
     </body>
 </html>
