@@ -66,8 +66,8 @@ def search():
         star_value = float(star)
         filtered_movies = [m for m in filtered_movies if float(m['star']) > star_value]
 
-    if country and country != 'Любое':
-        filtered_movies = [m for m in filtered_movies if m['age_rating'] == country]
+    if country and country != 'Любая':
+        filtered_movies = [m for m in filtered_movies if m['country'] == country]
     
     
     return jsonify(filtered_movies)

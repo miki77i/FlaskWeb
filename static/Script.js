@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let selectedGenre = null;
     let selectedAge = null;
     let selectedStar = null;
-    let selectedcountry = null
+    let selectedCountry = null
     
     // Обработчики для жанров
     document.querySelectorAll('.choice1 .criteria').forEach(button => {
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function() {
             document.querySelectorAll('.choice4 .criteria').forEach(btn => btn.classList.remove('active'));
             this.classList.add('active');
-            selectedStar = this.getAttribute('data-country');
+            selectedCountry = this.getAttribute('data-country');
         });
     });
         
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 genre: selectedGenre,
                 age_rating: selectedAge,
                 star: selectedStar,
-                country: selectedcountry
+                country: selectedCountry
             })
         })
         .then(response => response.json())
