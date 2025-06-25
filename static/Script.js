@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let selectedGenre = null;
     let selectedAge = null;
     let selectedStar = null;
+    let selectedcountry = null
     
     // Обработчики для жанров
     document.querySelectorAll('.choice1 .criteria').forEach(button => {
@@ -37,6 +38,15 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Пожалуйста, выберите жанр и возрастное ограничение');
             return;
         }
+
+        // Обработчики для страны
+    document.querySelectorAll('.choice4 .criteria').forEach(button => {
+        button.addEventListener('click', function() {
+            document.querySelectorAll('.choice4 .criteria').forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            selectedStar = this.getAttribute('data-country');
+        });
+    });
         
         fetch('/search', {
             method: 'POST',
@@ -46,7 +56,8 @@ document.addEventListener('DOMContentLoaded', function() {
             body: JSON.stringify({
                 genre: selectedGenre,
                 age_rating: selectedAge,
-                star: selectedStar
+                star: selectedStar,
+                country: selectedcountry
             })
         })
         .then(response => response.json())
@@ -63,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <h3>${movie.title}</h3>
                     <p><strong>Жанр:</strong> ${movie.genre}</p>
                     <p><strong>Возрастное ограничение:</strong> ${movie.age_rating}</p>
+                    <p>страна: ${movie.country}</p>
                     <p>Оценка: ${movie.star}</p>
                     <p><strong>Год выпуска:</strong> ${movie.year}</p>
                     <img src="${movie.image}">
