@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Страница поиска</title>
+        <title>Фильм на вечер</title>
     </head>
     <body>
         <main>
@@ -22,7 +22,7 @@
                 <button class="criteria"data-genre="Научное">Научное</button>
                 <button class="criteria"data-genre="Приключения">Приключения</button>
                 <button class="criteria"data-genre="Трагедия">Трагедия</button>
-                <button class="criteria"data-genre="Триллер">Триллер<button>
+                <button class="criteria"data-genre="Триллер">Триллер</button>
                 <button class="criteria"data-genre="Ужасы">Ужасы</button>
                 <button class="criteria"data-genre="Фантастика">Фантастика</button>
                 <button class="criteria"data-genre="Фэнтези">Фэнтези</button>
@@ -57,20 +57,20 @@
 
             <p>Страна производитель:</p>
             <div class="choice4">
-                <button class="criteria">Россия</button>
-                <button class="criteria">США</button>
-                <button class="criteria">Великобритания</button>
-                <button class="criteria">Южная Корея</button>
-                <button class="criteria">Франция</button>
-                <button class="criteria">Италия</button>
-                <button class="criteria">Канада</button>
-                <button class="criteria">Индия</button>
-                <button class="criteria">Испания</button>
-                <button class="criteria">Япония</button>
-                <button class="criteria">Германия</button>
-                <button class="criteria">Китай</button>
-                <button class="criteria">Другая</button>
-                <button class="criteria">Любая</button>
+                <button class="criteria" data-country="Россия">Россия</button>
+                <button class="criteria" data-country="США">США</button>
+                <button class="criteria" data-country="Великобритания">Великобритания</button>
+                <button class="criteria" data-country="Южная Корея">Южная Корея</button>
+                <button class="criteria" data-country="Франция">Франция</button>
+                <button class="criteria" data-country="Италия">Италия</button>
+                <button class="criteria" data-country="Канада">Канада</button>
+                <button class="criteria" data-country="Индия">Индия</button>
+                <button class="criteria" data-country="Испания">Испания</button>
+                <button class="criteria" data-country="Япония">Япония</button>
+                <button class="criteria" data-country="Германия">Германия</button>
+                <button class="criteria" data-country="Китай">Китай</button>
+                <button class="criteria" data-country="Другая">Другая</button>
+                <button class="criteria" data-country="Любая">Любая</button>
             </div>
 
             <!-- <div class="search">
@@ -126,4 +126,142 @@
 
         <script src="{{ url_for('static', filename='Script.js') }}"></script>
     </body>
+
+    <style>
+        body {
+            font-family: Pangolin, sans-serif;
+            background-color: #000063;;
+            text-align: center;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #ffffff;
+            text-align: center;
+            font-size: 50px;
+        }
+
+        p {
+            color: #ffffff;
+            font-size: 18px;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            text-align: center;
+            size: 30px;
+        }
+
+        .criteria {
+            font-family: Pangolin, sans-serif;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #fc7248;
+            color: #ffffff;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .criteria.active {
+            background-color: #d33100;
+            color: #ffffff;
+        }
+
+        .search {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .search-button {
+            padding: 18px 36px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            background-color: #fc7248;
+            color: white;
+            cursor: pointer;
+            margin-top: 30px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .filter-group span {
+            display: block;
+            margin: 10px 0;
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .filter-group div {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .movies {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .movie-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 200px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+        .movie-card:hover {
+            transform: scale(1.05);
+        }
+
+        .movie-card img {
+            width: 200px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .movie-title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .movie-details {
+            font-size: 14px;
+            text-align: center;
+        }
+
+
+    </style>
+
+    <script>
+        document.querySelectorAll('.criteria').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const parent = btn.parentElement;
+                parent.querySelectorAll('.criteria').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+    </script>
 </html>
