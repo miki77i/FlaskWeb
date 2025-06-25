@@ -38,7 +38,9 @@ movies = [
     {"title": "Человек-паук: Паутина вселенных", "genre": "Мультфильм", "age_rating": "12+", "country": "США", "star":9.5, "year": 2023, "image": "https://avatars.mds.yandex.net/get-kinopoisk-image/4483445/4756f2c5-a05d-4439-af60-f1e4bf3fa6a7/1920x", "note": "Визуальная революция"},
     {"title": "Меню", "genre": "Триллер/Сатира", "age_rating": "18+", "country": "США", "star":8, "year": 2022, "image": "https://avatars.mds.yandex.net/i?id=dfcd38fd9ff862f4de84cb8f5e993710_l-9106775-images-thumbs&n=13", "note": "Готовка + психология"},
     {"title": "Бунтарь", "genre": "Биография/Драма", "age_rating": "16+", "country": "Франция", "star":6.5, "year": 2023, "image": "https://www.kino-teatr.ru/movie/poster/162859/147840.jpg", "note": "Протесты в Беларуси"},
-    {"title": "Телефон мистера Харригана", "genre": "Триллер", "age_rating": "16+", "country": "США", "star":7.5, "year": 2022, "image": "https://avatars.mds.yandex.net/get-vthumb/905851/f721c2b5acfdf0663d515e8acd1fc459/564x318_1", "note": "Мистика от Стивена Кинга"}
+    {"title": "Телефон мистера Харригана", "genre": "Триллер", "age_rating": "16+", "country": "США", "star":7.5, "year": 2022, "image": "https://avatars.mds.yandex.net/get-vthumb/905851/f721c2b5acfdf0663d515e8acd1fc459/564x318_1", "note": "Мистика от Стивена Кинга"},
+    {"title": "Годзилла и Конг: Новая империя", "genre": "Фантастика", "age_rating": "12+", "country": "США", "star": 7.5, "year": 2024, "image": "https://i.ytimg.com/vi/_cmc5xrZHzg/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGHIgPChQMA8=&rs=AOn4CLDdRJKcmxsyARb041tKs-2WM0554Q", "note": "Эпическое противостояние титанов"},
+    {"title": "Вызов", "genre": "Драма", "age_rating": "12+", "country": "Россия", "star": 7.2, "year": 2023, "image": "https://mf.b37mrtl.ru/actualidad/public_images/2023.04/article/6438332859bf5b3e3673ade5.jpg", "note": "Первый в мире фильм, снятый в космосе"}
 ]
 
 
@@ -49,26 +51,34 @@ def slide1():
 @app.route('/search', methods=['POST'])
 def search():
     data = request.json
-    genre = data.get('genre')
-    age_rating = data.get('age_rating')
-    star = data.get('star')
-    country = data.get('country')
+    genres = data.get('genres', [])
+    ages = data.get('ages', [])
+    stars = data.get('stars', [])
+    countries = data.get('countries', [])
     
     filtered_movies = movies
     
-    if genre and genre != 'Любое':
-        filtered_movies = [m for m in filtered_movies if m['genre'] == genre]
+    if genres and not "Любое" in genres:
+        filtered_movies = [m for m in filtered_movies if m['genre'] in genres]
     
-    if age_rating and age_rating != 'Любое':
-        filtered_movies = [m for m in filtered_movies if m['age_rating'] == age_rating]
+    # Фильтрация по возрастным ограничениям (если выбраны)
+    if ages and not "Любое" in ages:
+        filtered_movies = [m for m in filtered_movies if m['age_rating'] in ages]
     
-    if star and star != '0':  # '0' означает "Любое"
-        star_value = float(star)
-        filtered_movies = [m for m in filtered_movies if float(m['star']) > star_value]
-
-    if country and country != 'Любая':
-        filtered_movies = [m for m in filtered_movies if m['country'] == country]
+    # Фильтрация по рейтингу (если выбраны)
+    if stars and not "0" in stars:
+        try:
+            # Конвертируем все значения в числа для сравнения
+            star_values = [float(s) for s in stars]
+            filtered_movies = [m for m in filtered_movies 
+                             if any(float(m['star']) > sv for sv in star_values)]
+        except ValueError:
+            pass
     
+    # Фильтрация по странам (если реализовано в данных)
+    if countries and not "Любая" in genres:
+        # Предполагаем, что у фильмов есть поле 'country'
+        filtered_movies = [m for m in filtered_movies if m.get('country') in countries]
     
     return jsonify(filtered_movies)
 
