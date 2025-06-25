@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
             data.forEach(movie => {
                 const movieDiv = document.createElement('div');
                 movieDiv.className = 'movie';
+                const encodedTitle = encodeURIComponent(movie.title);
                 movieDiv.innerHTML = `
                     <h3>${movie.title}</h3>
                     <p><strong>Жанр:</strong> ${movie.genre}</p>
@@ -77,7 +78,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p>страна: ${movie.country}</p>
                     <p>Оценка: ${movie.star}</p>
                     <p><strong>Год выпуска:</strong> ${movie.year}</p>
-                    <img src="${movie.image}">
+                    <a href="/movie/${encodedTitle}">
+                        <img src="${movie.image}" alt="${movie.title}">
+                    </a>
                 `;
                 resultsDiv.appendChild(movieDiv);
             });
