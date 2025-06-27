@@ -2,6 +2,10 @@
 <html>
     <head>
         <title>фильм</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=WDXL+Lubrifont+JP+N&display=swap" rel="stylesheet">
     </head>
     <body>
         <div class="movie-detail">
@@ -16,4 +20,65 @@
         <button class="back-button" onclick="history.back()">Назад</button>
     </div>
     </body>
+
+    <style>
+     body {
+        font-family: 'Pangolin';
+        background-color: #000063;
+        margin: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .movie-detail {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        max-width: 600px;
+        text-align: center;
+    }
+
+    .movie-detail h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .movie-poster {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 8px #0000001a;
+    }
+
+    p {
+        font-size: 18px;
+        margin: 10px 0;
+        color: #464646;
+        line-height: 1.4;
+    }
+
+    strong {
+        color: #000000;
+    }
+
+    .back-button {
+        margin-top: 30px;
+        padding: 12px 24px;
+        font-size: 16px;
+        border: none;
+        border-radius: 6px;
+        background-color: #fc7248;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .back-button:hover {
+        background-color: #d33100;
+    }
+    </style>
 </html>

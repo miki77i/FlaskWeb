@@ -72,12 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 movieDiv.className = 'movie';
                 const encodedTitle = encodeURIComponent(movie.title);
                 movieDiv.innerHTML = `
-                    <h3>${movie.title}</h3>
-                    <p><strong>Жанр:</strong> ${movie.genre}</p>
-                    <p><strong>Возрастное ограничение:</strong> ${movie.age_rating}</p>
-                    <p>страна: ${movie.country}</p>
-                    <p>Оценка: ${movie.star}</p>
-                    <p><strong>Год выпуска:</strong> ${movie.year}</p>
+                    <h3 style="color:white">${movie.title}</h3>
                     <a href="/movie/${encodedTitle}">
                         <img src="${movie.image}" alt="${movie.title}">
                     </a>

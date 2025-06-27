@@ -2,6 +2,10 @@
 <html>
     <head>
         <title>Фильм на вечер</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=WDXL+Lubrifont+JP+N&display=swap" rel="stylesheet">
     </head>
     <body>
         <main>
@@ -73,25 +77,19 @@
                 <button class="criteria" data-country="Любая">Любая</button>
             </div>
 
-            <!-- <a href="/s2">2</a> -->
-        </main>
 
-        
+        </main>
 
         <div class="search">
             <button class="search-button">Поиск</button>
         </div>
         
-        <!-- <div class="results" id="results" style="cursor:pointer;" onclick="window.location.href='templates/s2.html'"></div> -->
         <div class="results" id="results"></div>
 
         <footer>
             <div class="wrapper">
                 <div class="footer_wrapper">
                     <div class="footer_text">
-                        <p>Ф.И</p>
-                        <p>Ф.И</p>
-                        <p>Ф.И</p>
                         <p>(c)2025.</p>
                     </div>
                 </div>
@@ -103,8 +101,8 @@
 
     <style>
         body {
-            font-family: Pangolin, sans-serif;
-            background-color: #000063;;
+            font-family: Pangolin;
+            background-color: #000063;
             text-align: center;
             margin: 20px;
             padding: 20px;
@@ -126,7 +124,7 @@
         }
 
         .criteria {
-            font-family: Pangolin, sans-serif;
+            font-family: Pangolin;
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
@@ -155,78 +153,14 @@
             border: none;
             border-radius: 10px;
             background-color: #fc7248;
-            color: white;
+            color: #ffffff;
             cursor: pointer;
             margin-top: 30px;
         }
 
-        .filter-group {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-bottom: 20px;
+        .search-button:hover {
+            background-color: #d33100;
         }
-
-        .filter-group span {
-            display: block;
-            margin: 10px 0;
-            width: 100%;
-            text-align: center;
-            font-weight: bold;
-            font-size: 20px;
-        }
-
-        .filter-group div {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .movies {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .movie-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 200px;
-            background-color: rgba(255,255,255,0.1);
-            border-radius: 8px;
-            padding: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.3);
-            transition: transform 0.2s;
-        }
-        .movie-card:hover {
-            transform: scale(1.05);
-        }
-
-        .movie-card img {
-            width: 200px;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 4px;
-            margin-bottom: 10px;
-        }
-
-        .movie-title {
-            font-weight: bold;
-            font-size: 16px;
-            margin-bottom: 5px;
-            text-align: center;
-        }
-
-        .movie-details {
-            font-size: 14px;
-            text-align: center;
-        }
-
-
     </style>
 
     <script>
