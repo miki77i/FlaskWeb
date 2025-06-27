@@ -51,26 +51,34 @@ def slide1():
 @app.route('/search', methods=['POST'])
 def search():
     data = request.json
-    genre = data.get('genre')
-    age_rating = data.get('age_rating')
-    star = data.get('star')
-    country = data.get('country')
+    genres = data.get('genres', [])
+    ages = data.get('ages', [])
+    stars = data.get('stars', [])
+    countries = data.get('countries', [])
     
     filtered_movies = movies
     
-    if genre and genre != 'Любое':
-        filtered_movies = [m for m in filtered_movies if m['genre'] == genre]
+    if genres and not "Любое" in genres:
+        filtered_movies = [m for m in filtered_movies if m['genre'] in genres]
     
-    if age_rating and age_rating != 'Любое':
-        filtered_movies = [m for m in filtered_movies if m['age_rating'] == age_rating]
+    # Фильтрация по возрастным ограничениям (если выбраны)
+    if ages and not "Любое" in ages:
+        filtered_movies = [m for m in filtered_movies if m['age_rating'] in ages]
     
-    if star and star != '0':  # '0' означает "Любое"
-        star_value = float(star)
-        filtered_movies = [m for m in filtered_movies if float(m['star']) > star_value]
-
-    if country and country != 'Любое':
-        filtered_movies = [m for m in filtered_movies if m['age_rating'] == country]
+    # Фильтрация по рейтингу (если выбраны)
+    if stars and not "0" in stars:
+        try:
+            # Конвертируем все значения в числа для сравнения
+            star_values = [float(s) for s in stars]
+            filtered_movies = [m for m in filtered_movies 
+                             if any(float(m['star']) > sv for sv in star_values)]
+        except ValueError:
+            pass
     
+    # Фильтрация по странам (если реализовано в данных)
+    if countries and not "Любая" in genres:
+        # Предполагаем, что у фильмов есть поле 'country'
+        filtered_movies = [m for m in filtered_movies if m.get('country') in countries]
     
     return jsonify(filtered_movies)
 

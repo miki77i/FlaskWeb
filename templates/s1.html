@@ -11,7 +11,7 @@
         <main>
             <h1>Поиск</h1>
             <p>Жанры:</p>
-            <div class="choice1">
+            <div class="choice1 filter-group">
                 <button class="criteria"data-genre="Биография">Биография</button>
                 <button class="criteria"data-genre="Боевик">Боевик</button>
                 <button class="criteria"data-genre="Военный">Военный</button>
@@ -35,7 +35,7 @@
             </div>
             
             <p>Возростное ограничение:</p>
-            <div class="choice2">
+            <div class="choice2 filter-group">
                 <button class="criteria" data-age="0+">0+</button>
                 <button class="criteria" data-age="6+">6+</button>
                 <button class="criteria" data-age="12+">12+</button>
@@ -45,7 +45,7 @@
             </div>
 
             <p>Оценки пользователей:</p>
-            <div class="choice3">
+            <div class="choice3 filter-group">
                 <button class="criteria" data-star="9.5">> 9.5</button>
                 <button class="criteria" data-star="9">> 9</button>
                 <button class="criteria" data-star="8.5">> 8.5</button>
@@ -60,29 +60,38 @@
             </div>
 
             <p>Страна производитель:</p>
-            <div class="choice4">
-                <button class="criteria" data-country="Россия">Россия</button>
-                <button class="criteria" data-country="США">США</button>
-                <button class="criteria" data-country="Великобритания">Великобритания</button>
-                <button class="criteria" data-country="Южная Корея">Южная Корея</button>
-                <button class="criteria" data-country="Франция">Франция</button>
-                <button class="criteria" data-country="Италия">Италия</button>
-                <button class="criteria" data-country="Канада">Канада</button>
-                <button class="criteria" data-country="Индия">Индия</button>
-                <button class="criteria" data-country="Испания">Испания</button>
-                <button class="criteria" data-country="Япония">Япония</button>
-                <button class="criteria" data-country="Германия">Германия</button>
-                <button class="criteria" data-country="Китай">Китай</button>
-                <button class="criteria" data-country="Другая">Другая</button>
-                <button class="criteria" data-country="Любая">Любая</button>
+            <div class="choice4 filter-group">
+                <button class="criteria"data-country="Россия">Россия</button>
+                <button class="criteria"data-country="США">США</button>
+                <button class="criteria"data-country="Великобритания">Великобритания</button>
+                <button class="criteria"data-country="Южная Корея">Южная Корея</button>
+                <button class="criteria"data-country="Франция">Франция</button>
+                <button class="criteria"data-country="Италия">Италия</button>
+                <button class="criteria"data-country="Канада">Канада</button>
+                <button class="criteria"data-country="Индия">Индия</button>
+                <button class="criteria"data-country="Бразилия">Бразилия</button>
+                <button class="criteria"data-country="Испания">Испания</button>
+                <button class="criteria"data-country="Япония">Япония</button>
+                <button class="criteria"data-country="Германия">Германия</button>
+                <button class="criteria"data-country="Китай">Китай</button>
+                <button class="criteria"data-country="Новая Зеландия">Новая Зеландия</button>
+                <button class="criteria"data-country="Другая">Другая</button>
+                <button class="criteria"data-country="Любая">Любая</button>
             </div>
 
+             <div class="search">
+              <button class="reset-button">Сбросить все</button>
+                 <button class="search-button">Поиск</button>
+             </div>
 
         </main>
 
-        <div class="search">
+        
+
+        <!-- <div class="search">
             <button class="search-button">Поиск</button>
-        </div>
+        </div> -->
+        <div class="results" id="results"></div>
         
         <div class="results" id="results"></div>
 

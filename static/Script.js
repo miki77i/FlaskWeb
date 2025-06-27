@@ -1,71 +1,63 @@
 document.addEventListener('DOMContentLoaded', function() {
-    let selectedGenre = null;
-    let selectedAge = null;
-    let selectedStar = null;
-    let selectedcountry = null
+    // Объект для хранения выбранных фильтров
+    const selectedFilters = {
+        genres: [],
+        ages: [],
+        stars: [],
+        countries: []
+    };
     
-    // Обработчики для жанров
-    document.querySelectorAll('.choice1 .criteria').forEach(button => {
-        button.addEventListener('click', function() {
-            document.querySelectorAll('.choice1 .criteria').forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            selectedGenre = this.getAttribute('data-genre');
+    // Функция для обработки кликов по фильтрам
+    function setupFilterGroup(groupClass, filterType) {
+        document.querySelectorAll(`.${groupClass} .criteria`).forEach(button => {
+            button.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const value = this.getAttribute(`data-${filterType}`);
+                
+                if (this.classList.contains('active')) {
+                    // Добавляем фильтр
+                    selectedFilters[filterType + 's'].push(value);
+                } else {
+                    // Удаляем фильтр
+                    selectedFilters[filterType + 's'] = selectedFilters[filterType + 's'].filter(item => item !== value);
+                }
+            });
         });
-    });
-    
-    // Обработчики для возрастных ограничений
-    document.querySelectorAll('.choice2 .criteria').forEach(button => {
-        button.addEventListener('click', function() {
-            document.querySelectorAll('.choice2 .criteria').forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            selectedAge = this.getAttribute('data-age');
-        });
-    });
-    
-    // Обработчики для рейтинга
-    document.querySelectorAll('.choice3 .criteria').forEach(button => {
-        button.addEventListener('click', function() {
-            document.querySelectorAll('.choice3 .criteria').forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            selectedStar = this.getAttribute('data-star');
-        });
-    });
-    
+    }
 
+    
+    
+    // Инициализация всех групп фильтров
+    setupFilterGroup('choice1', 'genre');
+    setupFilterGroup('choice2', 'age');
+    setupFilterGroup('choice3', 'star');
+    setupFilterGroup('choice4', 'country');
+    
     // Обработчик кнопки поиска
     document.querySelector('.search-button').addEventListener('click', function() {
-        if (!selectedGenre || !selectedAge) {
-            alert('Пожалуйста, выберите жанр и возрастное ограничение');
+        // Проверяем, что выбрано хотя бы что-то в каждой категории
+        if (selectedFilters.genres.length === 0 || selectedFilters.ages.length === 0) {
+            alert('Пожалуйста, выберите хотя бы один жанр и одно возрастное ограничение');
             return;
         }
-
-        // Обработчики для страны
-    document.querySelectorAll('.choice4 .criteria').forEach(button => {
-        button.addEventListener('click', function() {
-            document.querySelectorAll('.choice4 .criteria').forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            selectedStar = this.getAttribute('data-country');
-        });
-    });
+        
         
         fetch('/search', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                genre: selectedGenre,
-                age_rating: selectedAge,
-                star: selectedStar,
-                country: selectedcountry
-            })
+            body: JSON.stringify(selectedFilters)
         })
         .then(response => response.json())
         .then(data => {
             const resultsDiv = document.getElementById('results');
             resultsDiv.innerHTML = '';
             
-            
+            if (data.length === 0) {
+                resultsDiv.innerHTML = '<p>Фильмы не найдены</p>';
+                return;
+            }
             
             data.forEach(movie => {
                 const movieDiv = document.createElement('div');
@@ -76,17 +68,31 @@ document.addEventListener('DOMContentLoaded', function() {
                     <a href="/movie/${encodedTitle}">
                         <img src="${movie.image}" alt="${movie.title}">
                     </a>
+                    <p><strong>Жанр:</strong> ${movie.genre}</p>
+                    <p><strong>Возрастное ограничение:</strong> ${movie.age_rating}</p>
+                    <p>Оценка: ${movie.star}</p>
+                    <p><strong>Год выпуска:</strong> ${movie.year}</p>
                 `;
                 resultsDiv.appendChild(movieDiv);
             });
-
-            if (data.length === 0) {
-                resultsDiv.innerHTML = '<p>Фильмы не найдены</p>';
-                return;
-            }
         })
         .catch(error => {
             console.error('Error:', error);
         });
     });
+});
+
+document.querySelector('.reset-button').addEventListener('click', function() {
+    // Сбрасываем все активные кнопки
+    document.querySelectorAll('.criteria').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    // Очищаем выбранные фильтры
+    for (const key in selectedFilters) {
+        selectedFilters[key] = [];
+    }
+    
+    // Очищаем результаты
+    document.getElementById('results').innerHTML = '';
 });
